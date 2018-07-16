@@ -1,0 +1,17 @@
+version: '2.1'
+
+services:
+  mean-example:
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    environment: 
+      - MONGODB_URI=mongodb://db:27017/my-heroes
+  db:
+    image: mongo:3.4.16-jessie
+    restart: always
+    volumes: 
+      - /data/db:/data/db
+    
