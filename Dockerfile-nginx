@@ -1,0 +1,13 @@
+# Angular App
+FROM hi1280/angular-cli:latest as build-stage
+WORKDIR /usr/src/app
+COPY ["package.json", "package-lock.json*", "./"]
+RUN npm install --production --silent
+COPY . .
+RUN npm run build
+# Nginx
+FROM nginx:alpine
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=build-stage /usr/src/app/dist/mean-example  /usr/share/nginx/html
+COPY ./nginx /etc/nginx/conf.d
+CMD ["nginx", "-g", "daemon off;"]
