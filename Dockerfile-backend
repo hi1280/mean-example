@@ -1,8 +1,8 @@
 FROM node:8.11.3-alpine
 WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "./"]
+COPY ["server.js", "/src/server/package.json", "/src/server/package-lock.json", "./"]
+COPY ["/src/server", "./src/server"]
 RUN npm install --production --silent
-COPY . .
 EXPOSE 3000
 ENV NODE_ENV production
 CMD [ "node", "server.js" ]

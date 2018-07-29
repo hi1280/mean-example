@@ -1,18 +1,18 @@
 version: '2.1'
 
 services:
-  nginx:
+  frontend:
     build:
       context: .
-      dockerfile: Dockerfile-nginx
+      dockerfile: Dockerfile-frontend
     ports:
       - 80:80
     depends_on:
-      - express
-  express:
+      - backend
+  backend:
     build:
       context: .
-      dockerfile: Dockerfile-express
+      dockerfile: Dockerfile-backend
     ports:
       - 3000:3000
     depends_on:
